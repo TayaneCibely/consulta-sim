@@ -25,7 +25,7 @@ class MedicoController < ApplicationController
   end
 
   def update
-    if current_medico.update(medico_params)
+    if current_medicos.update(medico_params)
       flash[:success] = "Dados atualizados"
       redirect_to consultas_path
     else

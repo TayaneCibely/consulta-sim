@@ -1,8 +1,15 @@
-  <h1>Cadastro</h1>
+<h1>Cadastrar Médico</h1>
 
-  <%= form_for @medico do |form|%>
+<%= form_with(model: @medico, url: medicos_path) do |form| %>
+  <div class="field">
+    <%= form.label :nome %>
+    <%= form.text_field :nome %>
+  </div>
 
-    <%=render 'form', form: form %>
-  <% end %>
+  <div class="field">
+    <%= form.label :especialidade %>
+    <%= form.text_field :especialidade %>
+  </div>
 
-  <%= link_to "Voltar", root_path %>
+  <%= form.submit "Cadastrar" %>
+<% end %>
