@@ -1,0 +1,39 @@
+  <h2>Visualização de dados</h2>
+
+  <p>
+    <strong>Nome:</strong>
+    <%=current_medico.nome %>
+  </p>
+
+  <p>
+    <strong>CRM:</strong>
+    <%= current_medico.crm %>
+  </p>
+
+  <p>
+    <strong>UF do CRM:</strong>
+    <%= current_medico.uf_crm %>
+  </p>
+
+  <p>
+    <strong>Especialidade Médica:</strong>
+    <%= current_medico.especialidade %>
+  </p>
+
+  <p>
+    <strong>CPF:</strong>
+    <%= current_medico.cpf %>
+  </p>
+
+  <p>
+    <strong>EMAIL:</strong>
+    <%= current_medico.email %>
+  </p>
+
+  <%= link_to 'Editar dados', edit_medico_path(current_medico) %>
+  <hr>
+
+  <h2> <%= link_to 'Ver Agendamentos', consultas_path(current_medico) %></h2>
+
+  <hr><hr>
+  <%= link_to "Sair", sair_path, method: :delete %>

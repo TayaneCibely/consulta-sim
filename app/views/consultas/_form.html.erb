@@ -1,0 +1,33 @@
+  <%= form_with(model: consulta) do |form| %>
+    <% if consulta.error.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(consulta.errors.count, "error") %> prohibited this consulta from being saved:</h2>
+
+
+        <ul>
+          <% consulta.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :nome_medico %>
+      <%= form.text_field :nome_medico %>
+    </div>
+
+    <div class="field">
+      <%= form.label :data %>
+      <%= form.date_select(:data, :data, :start_year => 2023, :end_year => 2030) %>
+    </div>
+
+    <div class="field">
+      <%= form.label :horario %>
+      <%= form.time_select :horario %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>

@@ -1,0 +1,63 @@
+<%= render 'layouts/error_menssages', object: form.object %>
+
+  <div class="field">
+    <%= form.label :nome_completo %>
+    <%= form.text_field :nome_completo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_nascimento %>
+    <%= form.date_select(:data_nascimento, :start_year => 1900, :end_year =>2023) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cpf %>
+    <%= form.text_field :cpf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :telefone %>
+    <%= form.text_field :telefone %>
+  </div>
+
+  <%= form.fields_for :endereco do |f| %>
+
+    <div class="field">
+      <%= f.label :cep %>
+      <%= f.text_field :cep %>
+    </div>
+
+    <div class="field">
+      <%= f.label :cidade %>
+      <%= f.text_field :cidade %>
+    </div>
+
+    <div class="field">
+      <%= f.label :bairro %>
+      <%= f.text_field :bairro %>
+    </div>
+
+    <div class="field">
+      <%= f.label :logradouro %>
+      <%= f.text_field :logradouro %>
+    </div>
+
+    <div class="field">
+      <%= f.label :complemento %>
+      <%= f.text_field :complemento %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>

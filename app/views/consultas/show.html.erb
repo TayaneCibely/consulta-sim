@@ -1,0 +1,19 @@
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Nome do Médico</strong>
+    <%= @consulta.nome_medico %>
+  </p>
+
+  <p>
+    <strong>Data:</strong>
+    <%= @consulta.data %>
+  </p>
+
+  <p>
+    <strong>Horário:</strong>
+    <%= @consulta.horario %>
+  </p>
+
+  <%= link_to 'Edit', edit_consulta_path(@consulta) %> |
+  <%= link_to 'Back', consultas_path %>

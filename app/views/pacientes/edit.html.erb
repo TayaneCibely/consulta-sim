@@ -1,0 +1,8 @@
+  <h1>Editar Dados</h1>
+
+  <%= form_for current_paciente do |form| %>
+
+    <%= render 'form', form: form %>
+  <% end %>
+
+  <% link_to "Voltar", consultas_path(current_paciente) %>
