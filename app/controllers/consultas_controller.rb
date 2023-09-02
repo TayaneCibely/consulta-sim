@@ -1,10 +1,13 @@
 class ConsultasController < ApplicationController
-  before_action :require_logged_in
   before_action :set_consulta, only: %i[ show edit update destroy ]
 
   # GET /consultas or /consultas.json
   def index
-    @consultas = current_paciente.consultas
+    @consultas = if params[:search_data].presence?
+                   search_consultas
+                 else
+                   Consulta.all
+                 end
   end
 
   # GET /consultas/1 or /consultas/1.json
@@ -22,11 +25,11 @@ class ConsultasController < ApplicationController
 
   # POST /consultas or /consultas.json
   def create
-    @consulta = current_paciente.consultas.build(consulta_params)
+    @consulta = Consulta.new(consulta_params)
 
     respond_to do |format|
       if @consulta.save
-        format.html { redirect_to @consulta, notice: "Consulta marcada com sucesso" }
+        format.html { redirect_to consultas_url(@consulta), notice: "Consulta marcada com sucesso" }
         format.json { render :show, status: :created, location: @consulta }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +42,7 @@ class ConsultasController < ApplicationController
   def update
     respond_to do |format|
       if @consulta.update(@consulta_params)
-        format.html { redirect_to @consulta, notice: "Consulta editada com sucesso" }
+        format.html { redirect_to consultas_url(@consulta), notice: "Consulta atualizada com sucesso" }
         format.json { render :show, status: :ok, location: @consulta }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,14 +60,28 @@ class ConsultasController < ApplicationController
     end
   end
 
+  def search
+    @consultas = search_consultas
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_consulta
-    @consulta = current_paciente.consultas.find(params[:id])
+    Consulta.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def consulta_params
-    params.require(:consulta).permit(:nome_medico,:data, :horario)
+    params.require(:consulta).permit(:data, :horario, :medico_id, :paciente_id)
+  end
+
+  def search_consultas
+    inicio_data = Data.parse(params[:inicio_data]) if params[:inicio_data].present?
+    fim_data = Data.parse(params[:fim_data]) if params[:fim_data].present?
+
+    consultas = Consulta.all
+    consultas = consultas.where(date: inicio_data..fim_data) if inicio_data && fim_data
+
+    consultas
   end
 end

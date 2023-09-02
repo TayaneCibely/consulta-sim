@@ -10,21 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_20_170317) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_20_165837) do
   create_table "consulta", force: :cascade do |t|
     t.string "nome_medico"
     t.date "data"
-    t.string "datetime"
+    t.datetime "horario"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "consultas", force: :cascade do |t|
-    t.string "nome_medico", null: false
-    t.date "data", null: false
-    t.datetime "horario", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "paciente_id"
+    t.integer "medico_id"
+    t.index ["medico_id"], name: "index_consulta_on_medico_id"
+    t.index ["paciente_id"], name: "index_consulta_on_paciente_id"
   end
 
   create_table "enderecos", force: :cascade do |t|
@@ -55,21 +51,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_20_170317) do
   create_table "pacientes", force: :cascade do |t|
     t.string "nome_completo"
     t.date "data_nascimento"
+    t.string "cpf"
     t.string "email"
     t.string "telefone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "cpf"
-  end
-
-  create_table "pacietes", force: :cascade do |t|
-    t.string "nome_completo", default: "", null: false
-    t.date "data_nascimento", null: false
-    t.string "cpf", default: "", null: false
-    t.string "nome_mae", default: "", null: false
-    t.string "telefone", default: "", null: false
-    t.string "email", default: "", null: false
-    t.string "password_digest", null: false
+    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,21 +1,13 @@
-Rails.application.routes.draw do
-  get '/sessions/new'
-  root to: 'home#index'
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'sair', to: 'sessions#destroy'
+# config/routes.rb
 
-  # Rotas para médicos
-  get 'login_medico', to: 'sessions#new_medico'
-  post 'login_medico', to: 'sessions#create_medico'
-  delete 'sair_medico', to: 'sessions#destroy_medico'
+Rails.application.routes.draw do
+  root 'home#index'
+
+  get '/consultas/search', to: 'consultas#search', as: 'search_consultas'
+  get '/medicos/search', to: 'medicos#search', as: 'search_medicos'
+  get '/pacientes/search', to: 'pacientes#search', as: 'search_pacientes'
 
   resources :consultas
-  resources :pacientes, only: [:new, :create, :show, :edit, :update]
-  resources :medico, only: [:new, :create, :show, :edit, :update, :new] # Adiciona :new à lista de ações permitidas
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :pacientes
+  resources :medicos
 end

@@ -1,13 +1,20 @@
-<h1> Bem-Vindo ao Consulta-sim</h1>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Consulta-Sim</title>
+    </head>
 
-<body>
+    <body>
+        <header>
+        <h1>Bem-Vindo ao Consulta-Sim</h1>
+        </header>
+           <p>Aqui você pode agendar sua consulta</p>
 
-<div style="margin-bottom: 20px;"></div>
-<%= link_to "LOGIN", login_path %> |
-<div style="margin-bottom: 20px;"></div>
-<%= link_to "CADASTRAR PACIENTE", new_paciente_path %>|
-<div style="margin-bottom: 20px;"></div>
-<%=link_to "CADASTRAR MÉDICO", new_medico_path %>|
-<div style="margin-bottom: 20px;"></div>
+           <div class="links">
+            <a href="<% pacientes_path %>" class="btn"><i class="fas fa-user"></i>Cadastrar Paciente</a>
+            <br>
 
-</body>
+            <a href="<% pacientes_url %>" class="btn"><i class="fas fa-user"></i>Ver a lista de Pacientes Cadastrados</a>
+           </div>
+    </body>
+</html>

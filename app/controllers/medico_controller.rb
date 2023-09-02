@@ -1,40 +1,67 @@
 class MedicoController < ApplicationController
-  before_action :require_logged_in, only:[:edit, :update]
+  before_action :set_medico, only: %i[ show edit update destroy]
+
+  def index
+    @medicos = Medico.all
+  end
 
   def new
-    @medico = Medico.new
+    @medicos = Medico.new
   end
 
   def show
+  end
 
+  def edit
+  end
+
+  def search
+    search_query = "%#{params[:query]}%"
+    @medicos = Medico.where("nome_medico LIKE :query OR cpf LIKE :query", query: search_query)
   end
 
   def create
     @medico = Medico.new(medico_params)
 
-    if @medico.save
-      flash[:success] = "Cadastrado com Sucesso"
-      redirect_to root_path
-    else
-      render 'new'
+    respond_to do |format|
+      if @medico.save
+        format.html { redirect_to medico_url(@medico), notice: "Médico criado com sucesso." }
+        format.json { render :show, status: :created, location: @medico }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @medico.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  def edit
-
+  def update
+    respond_to do |format|
+      if @medico.update(medico_params)
+        format.html { redirect_to medico_url(@medico), notice: "Médico atualizado com sucesso." }
+        format.json { render :show, status: :ok, location: @medico }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @medico.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  def update
-    if current_medicos.update(medico_params)
-      flash[:success] = "Dados atualizados"
-      redirect_to consultas_path
-    else
-      render 'edit'
+  def destroy
+    @medico.destroy
+
+    respond_to do |format|
+      format.html { redirect_to medico_url, notice: "Médico apagado com sucesso." }
+      format.json { head :no_content }
     end
   end
 
   private
-    def medico_params
-      params.require(:medico).permit(:nome, :crm, :uf_crm, :especialidade,:cpf, :email, :password)
-    end
+
+  def set_medico
+    @medico = Medico.find(params[:id])
+  end
+
+   def medico_params
+     params.require(:medico).permit(:nome_medico, :crm, :uf_crm, :especialidade,:cpf, :email)
+   end
 end
