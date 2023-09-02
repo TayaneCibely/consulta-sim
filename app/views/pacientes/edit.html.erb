@@ -1,8 +1,7 @@
-  <h1>Editar Dados</h1>
+  <h1>Editar Dados do Paciente</h1>
 
-  <%= form_for current_paciente do |form| %>
-
-    <%= render 'form', form: form %>
-  <% end %>
-
-  <% link_to "Voltar", consultas_path(current_paciente) %>
+  <div>
+    <%= render "form", paciente: @paciente %>
+    <%= link_to "Exibir este paciente", @paciente %>
+    <% link_to "Voltar para pacientes", pacientes_path %>
+  </div>

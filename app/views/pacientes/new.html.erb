@@ -1,8 +1,7 @@
-  <h1>Cadastro</h1>
+  <h1>Consulta-Sim - Cadastrar Novo Paciente:</h1>
 
-  <%= form_for @paciente do |form|%>
-
-    <%=render 'form', form: form %>
-  <% end %>
+  <div>
+    <%= render "form", paciente: @paciente %>
+  </div>
 
   <%= link_to "Voltar", root_path %>
