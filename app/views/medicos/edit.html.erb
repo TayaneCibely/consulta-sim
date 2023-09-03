@@ -1,8 +1,7 @@
-  <h1>Editar Dados</h1>
+<h1>Editar Dados do Médico: </h1>
 
-  <%= form_for current_medico do |form| %>
-
-    <%=render 'form', form: form %>
-  <% end %>
-
-  <%= link_to "Voltar", consultas_path(current_medico) %>
+<div>
+  <%= render "form", medico: @medico %>
+  <%= link_to "Exibir este Médico", @medico %>
+  <%= link_to "Voltar para Médicos", medicos_path %>
+</div>

@@ -1,36 +1,36 @@
-  <p id="notice"><%= notice %></p>
 
-  <h2> Olá, <%= current_paciente.nome_completo %></h2>
+  <div>
+    <h1>Agendamento de Consultas</h1>
 
-  <%= link_to 'Visualizar', current_paciente %> |
-  <%= link_to 'Editar Dados', edit_paciente_path(current_paciente)%>
-  <hr>
+    <%= form_tag(search_consultas_path, method: :get, id: "search-form") do %>
+      <div>
+        <%= label_tag :inicio_data, "Período de Início:", %>
+        <%= date_field_tag :inicio_data, params[:inicio_data] %>
+      </div>
+      <div>
+        <%= label_tag :fim_data, "Período de Término:" %>
+        <%= date_field_tag :fim_data, params[:fim_data] %>
+      </div>
+      <%= submit_tag "Pesquisar" %>
+    <% end %>
 
-  <h1>Agendamento de Consultas</h1>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Nome do Médico</th>
-        <th>Data</th>
-        <th>Horario</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
+    <div id="consultas-list">
       <% @consultas.each do |consulta| %>
-        <tr>
-          <td><%= consulta.nome_medico %></td>
-          <td><%= consulta.data %></td>
-          <td><%= consulta.horario %></td>
-          <td><%= link_to 'Show', consulta %></td>
-          <td><%= link_to 'Edit', edit_consulta_path(consulta), id:"e-#{consulta.nome_medico}" %></td>
-          <td><%= link_to 'Destroy', consulta, method: :delete, id:"d-#{consulta.nome_medico}" %></td>
-        </tr>
+        <p><span class="consulta-medico">
+          <%= consulta.paciente.present? ? consulta.paciente.nome_completo : "Nome do paciente não associado" %>
+        </span></p>
+        <p><span class="consulta-data">
+          <%= consulta.data.present? ? consulta.data.strftime("%d/%m/%Y") : "Data não definida" %>      
+        </span></p>
+       <p><span class="consulta-hora">
+          <%= consulta.hora.present? ? consulta.hora.strftime("%H:%M") : "Horário não definido" %>
+       </span></p>
+       <p><span class="consulta-medico">
+          <%= consulta.medico.present? ? consulta.medico.nome_medico : "Médico não associado" %>
+       </span></p>
+
+        <p><%= link_to "Detalhes do Agendamento", consulta %></p>    
       <% end %>
-    </tbody>
-  </table>
-  <%= link_to 'Nova Consulta', new_consulta_path %><br><br><br>
-  <hr><hr>
-  <%= link_to "Sair", sair_path, method: :delete %>
+    </div>
+
+  <%= link_to "Nova consulta", new_consulta_path %>

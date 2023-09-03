@@ -1,59 +1,44 @@
-  <h2> Visualização dos Dados</h2>
+<h1>Detalhes do Paciente</h1>
 
-  <p>
-    <strong>Nome Completo:</strong>
-    <%= current_paciente.nome_completo %>
-  </p>
+<div>
+  <div>
+    <h2><%= @paciente.nome_completo %></h2>
+    <p>CPF: <%= @paciente.cpf %></p>
+    <p>Data de Nascimento: <%= @paciente.data_nascimento %></p>
+    <p>Telefone: <%= @paciente.telefone %></p>
+    <p>Email: <%= @paciente.email %></p>
+    <p>
+      <strong>CEP:</strong>
+      <%= @paciente.endereco.cep %>
+    </p>
+  
+    <p>
+      <strong>Cidade:</strong>
+      <%= @paciente.endereco.cidade %>
+    </p>
+  
+    <p>
+      <strong>Bairro:</strong>
+      <%= @paciente.endereco.bairro %>
+    </p>
+  
+    <p>
+      <strong>Logradouro:</strong>
+      <%= @paciente.endereco.logradouro %>
+    </p>
+  
+    <p>
+      <strong>Complemento:</strong>
+      <%= @paciente.endereco.complemento %>
+    </p>
+  </div>
 
-  <p>
-    <strong>Data de Nascimento</strong>
-    <%= current_paciente.data_nascimento %>
-  </p>
+  <div>
+    <%= link_to 'Editar dados', edit_paciente_path(@paciente) %>
+    <%= button_to "Deletar Paciente", @paciente, method: :delete, data: { confirm: "Tem certeza que deseja apagar o paciente? " } %>
+    <%= link_to "Sair", pacientes_path %>
+  </div>
+</div>
+ 
 
-  <p>
-    <strong>CPF:</strong>
-    <%= current_paciente.cpf %>
-  </p>
-
-  <p>
-    <strong>Telefone:</strong>
-    <%= current_paciente.telefone %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= current_paciente.email %>
-  </p>
-
-  <p>
-    <strong>CEP:</strong>
-    <%= current_paciente.endereco.cep %>
-  </p>
-
-  <p>
-    <strong>Cidade:</strong>
-    <%= current_paciente.endereco.cidade %>
-  </p>
-
-  <p>
-    <strong>Bairro:</strong>
-    <%= current_paciente.endereco.bairro %>
-  </p>
-
-  <p>
-    <strong>Logradouro:</strong>
-    <%= current_paciente.endereco.logradouro %>
-  </p>
-
-  <p>
-    <strong>Complemento:</strong>
-    <%= current_paciente.endereco.complemento %>
-  </p>
-
-  <%= link_to 'Editar dados', edit_paciente_path(current_paciente) %>
-  <hr>
-
-  <h2><%= link_to 'Ver Agendamentos', consultas_path(current_paciente)%></h2>
-
-  <hr><hr>
-  <%= link_to "Sair", sair_path, method: :delete %>
+  
