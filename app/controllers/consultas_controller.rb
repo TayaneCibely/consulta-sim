@@ -3,7 +3,7 @@ class ConsultasController < ApplicationController
 
   # GET /consultas or /consultas.json
   def index
-    @consultas = if params[:search_data].presence?
+    @consultas = if params[:search_data].present?
                    search_consultas
                  else
                    Consulta.all
@@ -62,6 +62,7 @@ class ConsultasController < ApplicationController
 
   def search
     @consultas = search_consultas
+    render :index
   end
 
   private

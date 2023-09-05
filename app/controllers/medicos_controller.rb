@@ -1,12 +1,12 @@
-class MedicoController < ApplicationController
+class MedicosController < ApplicationController
   before_action :set_medico, only: %i[ show edit update destroy]
 
   def index
-    @medicos = Medico.all
+    @medico = Medico.all
   end
 
   def new
-    @medicos = Medico.new
+    @medico = Medico.new
   end
 
   def show
@@ -50,10 +50,11 @@ class MedicoController < ApplicationController
     @medico.destroy
 
     respond_to do |format|
-      format.html { redirect_to medico_url, notice: "Médico apagado com sucesso." }
+      format.html { redirect_to medicos_url, notice: "Médico apagado com sucesso." }
       format.json { head :no_content }
     end
   end
+
 
   private
 
@@ -61,7 +62,7 @@ class MedicoController < ApplicationController
     @medico = Medico.find(params[:id])
   end
 
-   def medico_params
-     params.require(:medico).permit(:nome_medico, :crm, :uf_crm, :especialidade,:cpf, :email)
-   end
+  def medico_params
+    params.require(:medico).permit(:nome, :crm, :uf_crm, :especialidade,:cpf, :email)
+  end
 end

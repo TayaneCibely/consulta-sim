@@ -1,4 +1,4 @@
-class PacienteController < ApplicationController
+class PacientesController < ApplicationController
   before_action :set_paciente, only: %i[show edit update destroy]
 
   def index
@@ -48,7 +48,7 @@ class PacienteController < ApplicationController
     @paciente.destroy
 
     respond_to do |format|
-      format.html { redirect_to paciente_url, notice: "Paciente apagado com sucesso." }
+      format.html { redirect_to pacientes_url, notice: "Paciente apagado com sucesso." }
       format.json { head :no_content }
     end
   end
@@ -60,6 +60,6 @@ class PacienteController < ApplicationController
   end
 
   def paciente_params
-    params.require(:paciente).permit(:nome_completo, :data_nascimento, :cpf, :telefone, :email, {:endereco_attributes => [:id, :cep, :cidade, :bairro, :logradouro, :complemento]})
+    params.require(:paciente).permit(:nome_completo, :data_nascimento, :cpf, :telefone, :email, endereco_attributes: [:id, :cep, :cidade, :bairro, :logradouro, :complemento])
   end
 end

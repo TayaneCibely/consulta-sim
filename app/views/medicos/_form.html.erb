@@ -1,17 +1,19 @@
-  <%= form_with(model: medico) do |form| %>
+  <%= form_with(model: medico, class: "medico-form") do |form| %>
     <% if medico.errors.any? %>
-      <div>
-        <h2><%= pluralize(medico.errors.count) %>Proibir esse médico de ser salvo:</h2>
+      <div class="error-messages">
+        <h2><%= pluralize(medico.errors.count, "error") %> Proibe o médico de ser salvo:</h2>
         <ul>
-          <% medico.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+           <% medico.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+           <% end %>
         </ul>
-      </div>
+     </div>
     <% end %>
+
 
   <div class="field">
     <%= form.label :nome, "Nome do Médico:" %>
-    <%= form.text_field :nome_medico %>
+    <%= form.text_field :nome %>
   </div>
 
   <div class="field">
@@ -53,5 +55,4 @@
     <%= form.submit "Salvar" %>
     <%= link_to "Voltar para a página inicial", root_path %>
   </div>
-
 <% end %>
