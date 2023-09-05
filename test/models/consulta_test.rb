@@ -49,7 +49,7 @@ class ConsultaTest < ActiveSupport::TestCase
   end
 
   test 'consulta ocupada' do
-    consulta_existente = Consulta.create(
+    Consulta.create(
       paciente: @paciente,
       medico: @medico,
       data: Date.current,
