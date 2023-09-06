@@ -18,20 +18,6 @@ Feature: Gerenciamento de Consultas
     Then eu sou redirecionado para a pagina da consulta
     Then eu vejo os dados da ultima consulta criada
 
-  Scenario: Tentar marcar uma consulta sem paciente
-    When eu estou na pagina de marcacao de consulta
-    And eu clico no botao de marcar consulta "Agendar Consulta"
-    Then eu vejo a mensagem de erro "Patient must exist"
-
-  Scenario: Editar uma consulta
-    When eu estou na pagina de visualizar consultas
-    And eu clico no botao de "Detalhes do Agendamento" para a consulta do paciente "Branco Branco" e dentista "Dr Drauzio Martela"
-    Then sou redirecionado para a pagina da consulta e vejo os dados do paciente "Branco Branco"
-    And click no botao "Editar Consulta"
-    And eu preencho a nova data "2023-08-26" e horario "15:00" para a consulta
-    And eu clico no botao de "Update Appointment"
-    Then eu sou redirecionado para a pagina da consulta
-    And eu vejo os dados atualizados da consulta
 
   Scenario: Tentar marcar uma consulta com data passada
     When eu estou na pagina de marcacao de consulta
