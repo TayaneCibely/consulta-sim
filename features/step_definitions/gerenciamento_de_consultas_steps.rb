@@ -18,7 +18,7 @@ And("eu preencho a data {string} e horário {string} para a consulta") do |data,
   fill_in 'Horario', with: horario
 end
 
-And("eu clico no botão de marcar consulta {string}") do |string|
+And("eu clico no botão de marcar consulta") do
   click_on 'Agendar Consulta'
 end
 
