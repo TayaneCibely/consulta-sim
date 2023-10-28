@@ -13,6 +13,14 @@ class PacientesController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def search
+    search_query = "%#{params[:query]}%"
+    @pacientes = Paciente.where("nome_completo LIKE :query OR cpf LIKE :query", query: search_query)
+  end
+
   def create
     @paciente = Paciente.new(paciente_params)
 

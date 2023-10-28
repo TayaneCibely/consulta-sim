@@ -5,8 +5,6 @@
         <p style="color: green;"><%= notice %></p>
     <% end %>
 
-    <%= link_to 'Voltar', :back %>
-
     <% if @pacientes.present? %>
       <% @pacientes.each do |paciente| %>
         <div>Nome do paciente: <%= paciente.nome_completo %></div>
@@ -18,4 +16,5 @@
     <% end %>
 
     <%= link_to "Novo Paciente", new_paciente_path %>
+    <%= link_to 'Voltar', :back %>
 </div>
