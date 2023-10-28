@@ -68,7 +68,7 @@ class ConsultasController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_consulta
-    Consulta.find_by(params[:id])
+    @consulta = Consulta.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
@@ -77,11 +77,11 @@ class ConsultasController < ApplicationController
   end
 
   def search_consultas
-    inicio_data = Data.parse(params[:inicio_data]) if params[:inicio_data].present?
-    fim_data = Data.parse(params[:fim_data]) if params[:fim_data].present?
+    inicio_data = Date.parse(params[:inicio_data]) if params[:inicio_data].present?
+    fim_data = Date.parse(params[:fim_data]) if params[:fim_data].present?
 
     consultas = Consulta.all
-    consultas = consultas.where(date: inicio_data..fim_data) if inicio_data && fim_data
+    consultas = consultas.where(data: inicio_data..fim_data) if inicio_data && fim_data
 
     consultas
   end
