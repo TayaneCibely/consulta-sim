@@ -61,8 +61,6 @@ class ConsultasController < ApplicationController
   end
 
   def search
-    @consultas = search_consultas
-    render :index
   end
 
   private

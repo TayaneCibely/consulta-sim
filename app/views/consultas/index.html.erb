@@ -2,18 +2,6 @@
   <div>
     <h1>Agendamento de Consultas</h1>
 
-    <%= form_tag(search_consultas_path, method: :get, id: "search-form") do %>
-      <div>
-        <%= label_tag :inicio_data, "Período de Início:" %>
-        <%= date_field_tag :inicio_data, params[:inicio_data] %>
-      </div>
-      <div>
-        <%= label_tag :fim_data, "Período de Término:" %>
-        <%= date_field_tag :fim_data, params[:fim_data] %>
-      </div>
-      <%= submit_tag "Pesquisar" %>
-    <% end %>
-
     <div id="consultas-list">
       <% @consultas.each do |consulta| %>
         <p><span class="consulta-medico">
