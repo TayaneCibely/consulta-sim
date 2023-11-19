@@ -1,2 +1,2 @@
-json.extract! consulta, :id, :nome, :data, :horario,:created_at, :update_at
+json.array! @consulta, partial: "consultas/consulta", as: :consulta
 json.url consulta_url(consulta, format: :json)

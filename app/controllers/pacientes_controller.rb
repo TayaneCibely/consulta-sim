@@ -58,6 +58,7 @@ class PacientesController < ApplicationController
 
   def set_paciente
     @paciente = Paciente.find(params[:id])
+    @endereco = Endereco.find_by_paciente_id(@paciente.id)
   end
 
   def paciente_params
