@@ -5,12 +5,6 @@
     <p style="color: green;"><%= notice %></p>
   <% end %>
 
-  <h2>Busque o paciente pelo nome ou CPF:</h2>
-  <%= form_tag search_pacientes_path, method: :get do %>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Buscar" %>
-  <% end %>
-
   <% @pacientes.each do |paciente| %>
     <div class="patient-card">
       <div>Nome do paciente: <%= paciente.nome_completo %></div>
