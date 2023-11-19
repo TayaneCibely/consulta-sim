@@ -16,8 +16,6 @@ class MedicosController < ApplicationController
   end
 
   def search
-    search_query = "%#{params[:query]}%"
-    @medicos = Medico.where("nome LIKE :query OR crm LIKE :query", query: search_query)
   end
 
   def create
