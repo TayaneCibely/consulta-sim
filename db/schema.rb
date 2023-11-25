@@ -10,36 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_231125) do
-  create_table "consulta", force: :cascade do |t|
-    t.string "nome_medico"
-    t.date "data"
-    t.datetime "horario"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "paciente_id"
-    t.integer "medico_id"
-    t.index ["medico_id"], name: "index_consulta_on_medico_id"
-    t.index ["paciente_id"], name: "index_consulta_on_paciente_id"
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_11_25_152831) do
   create_table "consultas", force: :cascade do |t|
     t.date "data"
     t.time "horario"
     t.integer "medico_id", null: false
+    t.integer "paciente_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["medico_id"], name: "index_consultas_on_medico_id"
-  end
-
-  create_table "endereco", force: :cascade do |t|
-    t.string "cep"
-    t.string "cidade"
-    t.string "bairro"
-    t.string "logradouro"
-    t.string "complemento"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["paciente_id"], name: "index_consultas_on_paciente_id"
   end
 
   create_table "enderecos", force: :cascade do |t|
@@ -54,33 +34,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_231125) do
     t.index ["paciente_id"], name: "index_enderecos_on_paciente_id"
   end
 
-  create_table "medico", force: :cascade do |t|
-    t.string "nome_medico"
+  create_table "medicos", force: :cascade do |t|
+    t.string "nome"
     t.string "crm"
     t.string "uf_crm"
     t.string "especialidade"
     t.string "cpf"
     t.string "email"
     t.time "inicio_consulta"
-    t.time "termino_consulta"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "medicos", force: :cascade do |t|
-    t.string "nome"
-    t.string "crm"
-    t.string "uf_crm"
-    t.string "string"
-    t.string "especialidade"
-    t.string "cpf"
-    t.string "email"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "paciente", force: :cascade do |t|
+  create_table "pacientes", force: :cascade do |t|
     t.string "nome_completo"
     t.string "data_nascimento"
     t.string "cpf"
@@ -90,17 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_231125) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pacientes", force: :cascade do |t|
-    t.string "nome_completo"
-    t.date "data_nascimento"
-    t.string "cpf"
-    t.string "email"
-    t.string "telefone"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "consultas", "medicos"
+  add_foreign_key "consultas", "pacientes"
   add_foreign_key "enderecos", "pacientes"
 end

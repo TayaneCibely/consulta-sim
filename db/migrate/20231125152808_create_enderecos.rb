@@ -1,6 +1,6 @@
 class CreateEnderecos < ActiveRecord::Migration[7.0]
   def change
-    create_table :endereco do |t|
+    create_table :enderecos do |t|
       t.string :cep
       t.string :cidade
       t.string :bairro
