@@ -19,6 +19,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'sassc'
 
 # Gemfile
+gem 'date_validator'
+
+
+# Gemfile
 gem 'timeliness'
 
 # Use the Puma web server [https://github.com/puma/puma]
