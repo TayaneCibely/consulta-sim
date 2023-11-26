@@ -1,4 +1,6 @@
 class Consulta < ApplicationRecord
+  self.table_name = 'consultas'
+
   belongs_to :paciente
   belongs_to :medico
 
@@ -6,7 +8,6 @@ class Consulta < ApplicationRecord
   validates :horario, presence: true
 
   validate :data_e_horario_valido
-  validate :consulta_ocupada
 
   private
 
@@ -19,11 +20,4 @@ class Consulta < ApplicationRecord
     end
   end
 
-  def consulta_ocupada
-    return unless medico && data.present? && horario.present?
-
-    if medico.consultas.exists?(data: data, horario: horario)
-      errors.add(:base, "Horário já ocupado por outra consulta")
-    end
-  end
 end

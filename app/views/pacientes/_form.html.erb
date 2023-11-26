@@ -22,7 +22,7 @@
 
     <div class="form-group">
       <%= form.label :data_nascimento, "Data de Nascimento", class: "form-label" %>
-      <%= form.date_field :data_nascimento, class: "form-input" %>
+      <%= form.date_field :data_nascimento, class: "form-input", value: @paciente.data_nascimento %>
     </div>
 
   <div class="form-group">

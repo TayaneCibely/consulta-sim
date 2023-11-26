@@ -3,7 +3,11 @@ class ConsultasController < ApplicationController
 
   # GET /consultas or /consultas.json
   def index
-    @consultas = Consulta.all
+    @consultas = if params[:search_data].present?
+                   search_consultas
+                 else
+                   Consulta.all
+                 end
   end
 
   # GET /consultas/1 or /consultas/1.json
@@ -21,8 +25,7 @@ class ConsultasController < ApplicationController
 
   # POST /consultas or /consultas.json
   def create
-    @paciente = Paciente.find(params[:paciente_id])
-    @consulta = @paciente.consultas.create(consulta_params)
+    @consulta = Consulta.new(consulta_params)
 
     respond_to do |format|
       if @consulta.save
@@ -58,12 +61,14 @@ class ConsultasController < ApplicationController
   end
 
   def search
+    @consultas = search_consultas
+    render :index
   end
 
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_consulta
-    @consulta = paciente_id.consultas.find(params[:id])
+    @consulta = Consulta.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
@@ -71,4 +76,13 @@ class ConsultasController < ApplicationController
     params.require(:consulta).permit(:data, :horario, :medico_id, :paciente_id)
   end
 
+  def search_consultas
+    inicio_data = Date.parse(params[:inicio_data]) if params[:inicio_data].present?
+    fim_data = Date.parse(params[:fim_data]) if params[:fim_data].present?
+
+    consultas = Consulta.all
+    consultas = consultas.where(data: inicio_data..fim_data) if inicio_data && fim_data
+
+    consultas
+  end
 end
