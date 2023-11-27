@@ -12,6 +12,6 @@ Feature: cadastrar um medico
   Scenario: cadastrar um medico com nome invalido
     Given estou na pagina de cadastrar medico
     When eu preencho os campos sem nome, crm: '22369', uf_crm: 'AL', cpf: '36987452147', especialidade: 'Ortopedia', email: 'examplemedico@gmail.com', inicio_consulta:'06:00', termino_consulta: '11:00'
-    And clico salvar
+    And clico salvar medico
     Then eu vejo uma mensagem de erro
 
