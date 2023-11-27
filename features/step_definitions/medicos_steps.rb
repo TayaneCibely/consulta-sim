@@ -40,7 +40,7 @@ When('eu preencho os campos sem nome, crm: {string}, uf_crm: {string}, cpf: {str
   fill_in 'medico[termino_consulta]', with: termino_consulta
 end
 
-When('clico salvar') do
+When('clico {string}') do |string|
   click_button 'Salvar'
 end
 
